@@ -12,7 +12,7 @@
                 <div class = "hourhand" id = "hourhand"></div>
                 <div class = "minutehand" id = "minutehand"></div>
                 <div class = "secondhand" id = "secondhand"></div>
-                <div class = "centredot"</div>
+                <div class = "centredot"></div>
                 </div>
             </div>
         </div>
@@ -39,11 +39,12 @@ Body{
     width: 50vh;
     border-radius: 50%;
     background-color: rgb(190, 190, 190);
-    box-shadow: 8px 8px 10px darkgrey, -8px -8px 10px rgb(197, 197, 197);
+    box-shadow: 8px 8px 10px darkgrey, -8px -8px 10px rgb(197, 197, 197), inset 3px 3px 10px darkgrey, -4px -4px 10px rgb(197, 197, 197);
     position: relative;
 }
 /*style numbers*/
 .face > * {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 4vh;
   color: rgb(168, 167, 167);
   text-shadow: -1px -1px 2px darkgrey, 1px 1px 3px lightgrey ;
@@ -67,7 +68,6 @@ Body{
     bottom :50%;
     transform-origin: bottom;
     transform: translate(-50%,-50%);
-  
 }
 .minutehand{
     height: 35%;
@@ -78,8 +78,6 @@ Body{
     bottom: 50%;
     transform-origin: bottom;
     transform: translate(-50%,-50%);
-  
-  
 }
 .secondhand{
     height: 40%;
@@ -91,66 +89,75 @@ Body{
     transform-origin: bottom;
     transform: translate(-50%,-50%);
     
+    
 }
 </style>
 <script>
-            let hourHand = document.getElementById("hourhand");
-            let minuteHand = document.getElementById("minutehand");
-            let secondHand = document.getElementById("secondhand");
+    let hourHand = document.getElementById("hourhand");
+    let minuteHand = document.getElementById("minutehand");
+    let secondHand = document.getElementById("secondhand");
 
-            let d = new Date();
-            let s = d.getSeconds();
-            let n = 360;
-            let sh = s * 6;
-            let h = d.getHours();
-            let minS = d.getMinutes();
-            let mh = minS * 6;
-            let hh = h * 30 + (mh / 10);
+    let d = new Date();
+    let s = d.getSeconds();
+    let n = 360;
+    let sh = s * 6;
+    let h = d.getHours();
+    let minS = d.getMinutes();
+    let mh = minS * 6;
+    let hh = h * 30 + (mh / 10);
             
-            function start()  {
-              secondHand.style  = "transform: rotate(" + sh + "deg)";
-              minuteHand.style = "transform: rotate(" + mh + "deg)";
-              hourHand.style = "transform: rotate(" + hh + "deg)";
-              
-            }
+    function start()  {
+      secondHand.style  = "transform: rotate(" + sh + "deg)";
+      minuteHand.style = "transform: rotate(" + mh + "deg)";
+      hourHand.style = "transform: rotate(" + hh + "deg)";
+      }
            
-            function moveRed() {
-              secondHand.style = "transform: rotate(" + (sh) + "deg)";
-              sh++;
-            }
-            
-            function moveBlack() {
-              minuteHand.style = "transform: rotate(" + (mh) + "deg)";
-              mh++;
-            }
+    function moveRed() {
+      let d = new Date();
+      let s = d.getSeconds();
+      let sh = s * 6;
+      secondHand.style = "transform: rotate(" + (sh) + "deg)";
+     /* if (s < 10) {secondHand.style.boxShadow =" "+ s - (s - 5) + "px 3px 5px rgb(121, 120, 120" 
+    } else if (s < 20) {secondHand.style.boxShadow =" "+ s -(s - 2) + "px 3px 5px rgb(121, 120, 120" 
+    } else if (s < 40) {secondHand.style.boxShadow =" "+ s -(s + 2) + "px 3px 5px rgb(121, 120, 120" 
+    } else if (s < 50) {secondHand.style.boxShadow =" "+ s -(s + 5) + "px 3px 5px rgb(121, 120, 120" 
+    }*/
+    }  
     
-            function moveBlue() {
-              hourHand.style = "transform: rotate(" + (hh) + "deg)"
-              hh++;            
-            }
-            function number(){
-              for (i = 1; i < 13; i++) {
-               
-               
-             
-               let newNum = document.createElement("div");
-               newNum.textContent =  i;
-               const getFace = document.getElementById("face");
-               getFace.appendChild(newNum);
-               newNum.id = "num" + i;
-               let j = i - 1;
-               const list1 = [12,28,50,72,88,95,88,72,50,28,12,5]
-               const list2 = [28,12,5,12,28,50,72,88,95,88,72,50]											
-               newNum.style = "position: absolute; top: "+ list1[j] +"%; right: "+ list2[j] +"%; transform: translate(+50%,-50%);";
-       
-            }
-            }
+    function moveBlack() {
+      let d = new Date();
+      let minS = d.getMinutes();
+      let mh = minS * 6;
+      minuteHand.style = "transform: rotate(" + (mh) + "deg)";
+      }
+    
+    function moveBlue() {
+      let d = new Date();
+      let h = d.getHours();
+      let mh = minS * 6;
+      let hh = h * 30 + (mh / 10);
+      hourHand.style = "transform: rotate(" + (hh) + "deg)";
+      }
+      
+    function number(){
+      for (i = 1; i < 13; i++) {
+      let newNum = document.createElement("div");
+      newNum.textContent =  i;
+      const getFace = document.getElementById("face");
+      getFace.appendChild(newNum);
+      newNum.id = "num" + i;
+      let j = i - 1;
+      const list1 = [12,28,50,72,88,95,88,72,50,28,12,5]
+      const list2 = [28,12,5,12,28,50,72,88,95,88,72,50]											
+      newNum.style = "position: absolute; top: "+ list1[j] +"%; right: "+ list2[j] +"%; transform: translate(+50%,-50%);";
+      }
+      }
 
-            start();
-            number();
-            setInterval(moveRed,1000);
-            setInterval(moveBlack, 60000);
-            setInterval(moveBlue, 60000);
+    start();
+    number();
+    setInterval(moveRed,1000);
+    setInterval(moveBlack, 60000);
+    setInterval(moveBlue, 60000);
             
             
             
