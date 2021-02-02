@@ -1,0 +1,161 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <meta name = "viewport" content="width = device-width, height = device-height, initial-scale=1.0, minimum-scale=1">
+        <Title>myClock</Title>
+
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class = "face" id ="face">
+                <div class = "hourhand" id = "hourhand"></div>
+                <div class = "minutehand" id = "minutehand"></div>
+                <div class = "secondhand" id = "secondhand"></div>
+                <div class = "centredot"</div>
+                </div>
+            </div>
+        </div>
+<style>
+            *{
+    margin: 0px;
+    padding : 0px;
+    box-sizing: border-box;
+}
+Body{
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+.wrapper{
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+    background-color: rgb(190, 190, 190);
+}
+.face{
+    height: 50vh;
+    width: 50vh;
+    border-radius: 50%;
+    background-color: rgb(190, 190, 190);
+    box-shadow: 8px 8px 10px darkgrey, -8px -8px 10px rgb(197, 197, 197);
+    position: relative;
+}
+/*style numbers*/
+.face > * {
+  font-size: 4vh;
+  color: rgb(168, 167, 167);
+  text-shadow: -1px -1px 2px darkgrey, 1px 1px 3px lightgrey ;
+}
+.centredot{
+  height:10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color:rgb(255, 44, 44);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.hourhand{
+    height: 30%;
+    width: 5px;
+    background-color: rgb(163, 163, 202);
+    position: absolute;
+    Left: 50%;
+    bottom :50%;
+    transform-origin: bottom;
+    transform: translate(-50%,-50%);
+  
+}
+.minutehand{
+    height: 35%;
+    width: 3px;
+    background-color: rgb(49, 23, 23);
+    position: absolute;
+    Left: 50%;
+    bottom: 50%;
+    transform-origin: bottom;
+    transform: translate(-50%,-50%);
+  
+  
+}
+.secondhand{
+    height: 40%;
+    width: 1px;
+    background-color: rgb(255, 44, 44);
+    position: absolute;
+    Left: 50%;
+    bottom: 50%;
+    transform-origin: bottom;
+    transform: translate(-50%,-50%);
+    
+}
+</style>
+<script>
+            let hourHand = document.getElementById("hourhand");
+            let minuteHand = document.getElementById("minutehand");
+            let secondHand = document.getElementById("secondhand");
+
+            let d = new Date();
+            let s = d.getSeconds();
+            let n = 360;
+            let sh = s * 6;
+            let h = d.getHours();
+            let minS = d.getMinutes();
+            let mh = minS * 6;
+            let hh = h * 30 + (mh / 10);
+            
+            function start()  {
+              secondHand.style  = "transform: rotate(" + sh + "deg)";
+              minuteHand.style = "transform: rotate(" + mh + "deg)";
+              hourHand.style = "transform: rotate(" + hh + "deg)";
+              
+            }
+           
+            function moveRed() {
+              secondHand.style = "transform: rotate(" + (sh) + "deg)";
+              sh++;
+            }
+            
+            function moveBlack() {
+              minuteHand.style = "transform: rotate(" + (mh) + "deg)";
+              mh++;
+            }
+    
+            function moveBlue() {
+              hourHand.style = "transform: rotate(" + (hh) + "deg)"
+              hh++;            
+            }
+            function number(){
+              for (i = 1; i < 13; i++) {
+               
+               
+             
+               let newNum = document.createElement("div");
+               newNum.textContent =  i;
+               const getFace = document.getElementById("face");
+               getFace.appendChild(newNum);
+               newNum.id = "num" + i;
+               let j = i - 1;
+               const list1 = [12,28,50,72,88,95,88,72,50,28,12,5]
+               const list2 = [28,12,5,12,28,50,72,88,95,88,72,50]											
+               newNum.style = "position: absolute; top: "+ list1[j] +"%; right: "+ list2[j] +"%; transform: translate(+50%,-50%);";
+       
+            }
+            }
+
+            start();
+            number();
+            setInterval(moveRed,1000);
+            setInterval(moveBlack, 60000);
+            setInterval(moveBlue, 60000);
+            
+            
+            
+            
+
+</script> 
+</body>
+</html>
